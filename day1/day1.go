@@ -77,7 +77,7 @@ func Directions(src iter.Seq2[string, error]) iter.Seq2[Instruction, error] {
 
 func main() {
 	var dial int64 = 50
-	var count uint
+	var count1, count2 uint
 
 	for dir, err := range Directions(Lines("input")) {
 		if err != nil {
@@ -87,12 +87,18 @@ func main() {
 		if dir.dir == Right {
 			sign = 1
 		}
-		val := sign * int(dir.amount)
-		dial = (dial + int64(val)) % 100
+		// val := sign * int(dir.amount)
+		for range dir.amount {
+			dial = (dial + int64(sign)) % 100
+			if dial == 0 {
+				count2++
+			}
+		}
 		if dial == 0 {
-			count++
+			count1++
 		}
 	}
 
-	fmt.Println(count)
+	fmt.Println(count1)
+	fmt.Println(count2)
 }
