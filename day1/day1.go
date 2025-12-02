@@ -64,13 +64,16 @@ func Directions(src iter.Seq2[string, error]) iter.Seq2[Instruction, error] {
 			rest, err := strconv.Atoi(line[1:])
 			if err != nil {
 				yield(instr, err)
+				return
 			}
 
 			if rawDir == 'R' {
 				instr.dir = Right
 			}
 			instr.amount = uint64(rest)
-			yield(instr, nil)
+			if !yield(instr, nil) {
+				return
+			}
 		}
 	}
 }
