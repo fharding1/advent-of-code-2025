@@ -1,0 +1,6 @@
+bin/
+input
+include/
+lib/
+test_input
+*.cfg
